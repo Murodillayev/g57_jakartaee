@@ -4,10 +4,7 @@ import uz.pdp.g57jakarta_ee.config.DbConfig;
 import uz.pdp.g57jakarta_ee.dao.AuthUserDao;
 import uz.pdp.g57jakarta_ee.model.AuthUser;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Optional;
 
 public class AuthUserDaoImpl implements AuthUserDao {
@@ -23,13 +20,12 @@ public class AuthUserDaoImpl implements AuthUserDao {
 
     @Override
     public Optional<AuthUser> findByUsername(String uName) {
+        String query = "SELECT * FROM users WHERE username = ?;";
 
         try (Connection connection = DbConfig.getConnection();
-             Statement statement = connection.createStatement();) {
-
-            String query = "SELECT * FROM users WHERE username = '%s'".formatted(uName);
-            ResultSet resultSet = statement.executeQuery(query);
-
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, uName);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String userId = resultSet.getString("id");
                 String fullName = resultSet.getString("full_name");
@@ -53,10 +49,10 @@ public class AuthUserDaoImpl implements AuthUserDao {
 
     @Override
     public AuthUser save(AuthUser authUser) {
+        String query = "insert into users(id,full_name,username,password) values (?,?,?,?)";
         try (Connection connection = DbConfig.getConnection();
-             Statement statement = connection.createStatement();) {
-            String query = "insert into users(id,full_name,username,password) values ('%s','%s','%s','%s')".formatted(authUser.getId(), authUser.getFullName(), authUser.getUsername(), authUser.getPassword());
-            statement.execute(query);
+             PreparedStatement statement = connection.prepareStatement(query);) {
+            statement.execute();
 
             return authUser;
         } catch (SQLException e) {
@@ -66,11 +62,11 @@ public class AuthUserDaoImpl implements AuthUserDao {
 
     @Override
     public Optional<AuthUser> findById(String userId) {
+        String query = "select * from users where id = ?";
         try (Connection connection = DbConfig.getConnection();
-             Statement statement = connection.createStatement();) {
-            String query = "select * from users where id = '%s'".formatted(userId);
-            ResultSet resultSet = statement.executeQuery(query);
-
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, userId);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");

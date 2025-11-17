@@ -1,5 +1,6 @@
 package uz.pdp.g57jakarta_ee.dao.impl;
 
+import lombok.NonNull;
 import org.postgresql.Driver;
 import uz.pdp.g57jakarta_ee.config.DbConfig;
 import uz.pdp.g57jakarta_ee.dao.TodoDao;
@@ -17,11 +18,15 @@ public class TodoDaoImpl implements TodoDao {
 
     @Override
     public void create(Todo todo) {
+        String sql = "INSERT INTO todos (id, title, description,user_id) VALUES (?,?,?,?)";
         // PrepareStatement
         try (Connection connection = DbConfig.getConnection();
-             Statement statement = connection.createStatement()) {
-            String sql = "INSERT INTO todos (id, title, description,user_id) VALUES ('%s','%s','%s','%s')".formatted(todo.getId(), todo.getTitle(), todo.getDescription(), todo.getUserId());
-            statement.execute(sql);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, todo.getId());
+            statement.setString(2, todo.getTitle());
+            statement.setString(3, todo.getDescription());
+            statement.setString(4, todo.getUserId());
+            statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -30,11 +35,11 @@ public class TodoDaoImpl implements TodoDao {
 
     @Override
     public void delete(String todoId) {
+        String sql = "DELETE FROM todos WHERE id = ?";
         try (Connection connection = DbConfig.getConnection();
-             Statement statement = connection.createStatement()) {
-
-            String sql = "DELETE FROM todos WHERE id = '" + todoId + "'";
-            statement.execute(sql);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, todoId);
+            statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -43,12 +48,12 @@ public class TodoDaoImpl implements TodoDao {
 
     @Override
     public Optional<Todo> findById(String todoId) {
+        String sql = "select * from todos where id = ?";
 
         try (Connection connection = DbConfig.getConnection();
-             Statement statement = connection.createStatement()) {
-
-            String sql = "select * from todos where id = '" + todoId + "'";
-            ResultSet resultSet = statement.executeQuery(sql);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, todoId);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 return Optional.of(mapper.fromResultSet(resultSet));
             }
@@ -67,17 +72,12 @@ public class TodoDaoImpl implements TodoDao {
     @Override
     public List<Todo> findAll(String userId) {
         List<Todo> todos = new ArrayList<>();
-        try {
-            DriverManager.registerDriver(new Driver());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        String sql = "select * from todos where user_id = ?";
         try (Connection connection = DbConfig.getConnection();
-             Statement statement = connection.createStatement()) {
-            String sql = "select * from todos where user_id = '%s'".formatted(userId);
-            ResultSet resultSet = statement.executeQuery(sql);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, userId);
 
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Todo todo = mapper.fromResultSet(resultSet);
                 todos.add(todo);
@@ -88,6 +88,4 @@ public class TodoDaoImpl implements TodoDao {
 
         return todos;
     }
-
-
 }

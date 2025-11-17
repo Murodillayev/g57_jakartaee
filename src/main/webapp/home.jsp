@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="d" uri="http://java.sun.com/jsp/jstl/sql" %>
 
 <html lang="en">
 <head>
@@ -14,10 +15,24 @@
 </head>
 <body style="padding: 100px">
 
+<d:setDataSource
+        url="jdbc:postgresql://localhost:5432/todo"
+        driver="org.postgresql.Driver"
+        user="macbookpro"
+        password="19801980"
+        var="myDatasource"
+></d:setDataSource>
+
+<d:query var="todo_list" dataSource="${myDatasource}">
+    select * from todos;
+</d:query>
+
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">

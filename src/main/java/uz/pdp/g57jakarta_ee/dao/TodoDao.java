@@ -16,7 +16,7 @@ public interface TodoDao {
 
     void update(Todo todo);
 
-    default List<Todo> findAll(String userId){
+    default List<Todo> findAll(String userId) {
         return Collections.emptyList();
     }
 

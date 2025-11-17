@@ -44,6 +44,7 @@ public class TodoServlet extends HttpServlet {
             resp.sendRedirect("/login.jsp");
             return;
         }
+
         String userId = session.getAttribute("userId").toString();
         List<Todo> todos = service.getAll(userId);
         String action = req.getParameter("action");
@@ -55,6 +56,7 @@ public class TodoServlet extends HttpServlet {
         } else {
             session.setAttribute("todos", todos);
 //            resp.sendRedirect("/home.jsp");
+
 
             req.setAttribute("todos", todos);
             req.getRequestDispatcher("home.jsp").forward(req, resp);
