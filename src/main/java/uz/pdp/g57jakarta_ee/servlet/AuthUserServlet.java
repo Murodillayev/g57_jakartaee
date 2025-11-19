@@ -27,3 +27,7 @@ public class AuthUserServlet extends HttpServlet {
 
     }
 }
+
+
+// server(jakarta_app, spring_app, ...)(crete session)       <-(http)    (sesId)client(chrome,safari,firefox,java_app ,....)
+// server(jakarta_app, spring_app, ...)(get session)       <-(http)    (sesId)client(chrome,safari,firefox,java_app ,....)
