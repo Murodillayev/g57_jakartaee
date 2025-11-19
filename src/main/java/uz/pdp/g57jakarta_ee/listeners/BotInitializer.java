@@ -1,4 +1,4 @@
-package uz.pdp.g57jakarta_ee.bot;
+package uz.pdp.g57jakarta_ee.listeners;
 
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebListener;
 import lombok.SneakyThrows;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import uz.pdp.g57jakarta_ee.bot.TodoBot;
 
 @WebListener
 public class BotInitializer implements ServletContextListener {
