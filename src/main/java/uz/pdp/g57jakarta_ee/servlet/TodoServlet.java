@@ -20,9 +20,7 @@ public class TodoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("userId") == null) {
-            response.sendRedirect("/login");
-        }
+
         String userId = session.getAttribute("userId").toString();
 
         String action = request.getParameter("action");
@@ -40,10 +38,6 @@ public class TodoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        if (session.getAttribute("userId") == null) {
-            resp.sendRedirect("/login.jsp");
-            return;
-        }
         String userId = session.getAttribute("userId").toString();
         List<Todo> todos = service.getAll(userId);
         String action = req.getParameter("action");
@@ -74,3 +68,6 @@ public class TodoServlet extends HttpServlet {
 
 
 // request, session, application
+
+// authentication -> userni tanish jarayoni
+// authorization  -> userni huquqlarini tekshirish jarayoni

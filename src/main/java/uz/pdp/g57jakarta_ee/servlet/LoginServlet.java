@@ -2,10 +2,7 @@ package uz.pdp.g57jakarta_ee.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import uz.pdp.g57jakarta_ee.model.AuthUser;
 import uz.pdp.g57jakarta_ee.service.AuthUserService;
 

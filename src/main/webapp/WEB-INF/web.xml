@@ -6,4 +6,14 @@
 <!--    <listener>-->
 <!--        <listener-class>uz.pdp.g57jakarta_ee.listeners.BotInitializer</listener-class>-->
 <!--    </listener>-->
+
+<!--    <filter>-->
+<!--        <filter-name>test-filter</filter-name>-->
+<!--        <filter-class>uz.pdp.g57jakarta_ee.filters.TestFilter</filter-class>-->
+<!--    </filter>-->
+<!--    -->
+<!--    <filter-mapping>-->
+<!--        <filter-name>test-filter</filter-name>-->
+<!--        <url-pattern>/todo/*</url-pattern>-->
+<!--    </filter-mapping>-->
 </web-app>
