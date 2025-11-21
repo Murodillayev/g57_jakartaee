@@ -1,15 +1,15 @@
 package uz.pdp.g57jakarta_ee.service;
 
-import uz.pdp.g57jakarta_ee.dao.AuthUserDao;
-import uz.pdp.g57jakarta_ee.dao.impl.AuthUserDaoImpl;
 import uz.pdp.g57jakarta_ee.model.AuthUser;
+import uz.pdp.g57jakarta_ee.model.Gender;
+import uz.pdp.g57jakarta_ee.repository.AuthUserRepository;
+import uz.pdp.g57jakarta_ee.repository.impl.AuthUserRepositoryImpl;
 
 import java.util.UUID;
 
 public class AuthUserService {
     private static AuthUserService instance;
-//    private AuthUserDao dao = AuthUserInMemDao.getInstance();
-    private AuthUserDao dao = AuthUserDaoImpl.getInstance();
+    private AuthUserRepository repository = AuthUserRepositoryImpl.getInstance();
 
     private AuthUserService() {
     }
@@ -22,7 +22,7 @@ public class AuthUserService {
     }
 
     public AuthUser login(String username, String password) {
-        AuthUser authUser = dao.findByUsername(username).orElseThrow(
+        AuthUser authUser = repository.findByUsername(username).orElseThrow(
                 () -> new RuntimeException("Bad credentials!")
         );
 
@@ -33,22 +33,22 @@ public class AuthUserService {
         return authUser;
     }
 
-    public void create(String username, String password, String fullName, String imgPath) {
+    public void create(String username, String password, String fullName, String imgPath, Gender gender) {
         AuthUser authUser = AuthUser.builder()
                 .fullName(fullName)
                 .username(username.toLowerCase())
                 .password(password)
                 .imgPath(imgPath)
+                .gender(gender)
                 .id(UUID.randomUUID().toString())
                 .build();
 
-        dao.save(authUser);
+        repository.save(authUser);
 
-        System.out.println(authUser.getId());
     }
 
     public AuthUser get(String userId) {
-        return dao.findById(userId).orElseThrow(
+        return repository.findById(userId).orElseThrow(
                 () -> new RuntimeException("User not found!")
         );
     }

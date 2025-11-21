@@ -1,4 +1,4 @@
-package uz.pdp.g57jakarta_ee;
+package uz.pdp.g57jakarta_ee.utils;
 
 import jakarta.servlet.http.Part;
 
