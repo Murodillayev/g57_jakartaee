@@ -1,16 +1,18 @@
 package uz.pdp.g57jakarta_ee.entities;
 
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@DiscriminatorColumn(name = "user_type")
+@Entity
 public class AuthUser extends AuditableEntity {
     private String fullName;
     private String username;
@@ -18,3 +20,6 @@ public class AuthUser extends AuditableEntity {
     private String phone;
 
 }
+// JOINED
+// SINGLE_TABLE
+// ALOHIDA_JADVAL

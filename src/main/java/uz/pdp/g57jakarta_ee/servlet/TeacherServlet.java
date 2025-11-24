@@ -17,6 +17,11 @@ public class TeacherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (req.getParameter("post") != null) {
+            repository.create();
+        }
+
         List<Teacher> teachers = repository.findAll();
         req.setAttribute("teachers", teachers);
         req.getRequestDispatcher("teachers.jsp").forward(req, resp);
