@@ -7,9 +7,8 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!--        <class>uz.pdp.g57jakarta_ee.model.AuthUser</class>-->
-        <!--        <class>uz.pdp.g57jakarta_ee.model.Todo</class>-->
-
+        <class>uz.pdp.g57jakarta_ee.entities.Teacher</class>
+        <class>uz.pdp.g57jakarta_ee.entities.Student</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:postgresql://localhost:5432/todo?currentSchema=orm"/>

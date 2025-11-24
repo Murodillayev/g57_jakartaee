@@ -14,7 +14,6 @@ public class TeacherRepository {
     public List<Teacher> findAll() {
         EntityManagerFactory emf = JpaConfig.entityManagerFactory();
         EntityManager em = emf.createEntityManager();
-
         TypedQuery<Teacher> query = em.createQuery("from Teacher", Teacher.class);
 
         List<Teacher> list = query.getResultList();

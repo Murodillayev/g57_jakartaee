@@ -1,20 +1,20 @@
 package uz.pdp.g57jakarta_ee.entities;
 
+import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @MappedSuperclass
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class AuthUser extends AuditableEntity {
-    private String fullName;
-    private String username;
-    private String password;
-    private String phone;
-
+@AllArgsConstructor
+@NoArgsConstructor
+public class IdEntity {
+    @Id
+    private String id =  UUID.randomUUID().toString();
 }
