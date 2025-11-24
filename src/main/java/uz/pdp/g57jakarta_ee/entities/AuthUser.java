@@ -6,13 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @DiscriminatorColumn(name = "user_type")
 @Entity
+@Table(name = "auth_user")
 public class AuthUser extends AuditableEntity {
     private String fullName;
     private String username;

@@ -35,8 +35,5 @@ public class StudentRepository {
         em.persist(student);
         em.getTransaction().commit();
         em.close();
-
     }
-
-    ;
 }

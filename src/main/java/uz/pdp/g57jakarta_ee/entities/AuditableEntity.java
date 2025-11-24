@@ -19,5 +19,4 @@ public class AuditableEntity extends IdEntity {
     private String createdBy;
     private String updatedBy;
     private Boolean deleted;
-
 }
