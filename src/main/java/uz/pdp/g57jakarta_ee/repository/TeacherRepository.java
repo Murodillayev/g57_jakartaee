@@ -8,7 +8,6 @@ import uz.pdp.g57jakarta_ee.entities.Teacher;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 public class TeacherRepository {
 
     public List<Teacher> findAll() {
@@ -18,11 +17,9 @@ public class TeacherRepository {
         List<Teacher> list = query.getResultList();
 
         em.close();
-
+        // main
         return list;
     }
-
-    ;
 
     public void create() {
         EntityManager em = JpaConfig.entityManager();

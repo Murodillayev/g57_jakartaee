@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@DiscriminatorColumn(name = "user_type")
+//@DiscriminatorColumn(name = "user_type")
 @Entity
 @Table(name = "auth_user")
 public class AuthUser extends AuditableEntity {
@@ -19,8 +19,9 @@ public class AuthUser extends AuditableEntity {
     private String username;
     private String password;
     private String phone;
-
 }
+
+
 // JOINED
 // SINGLE_TABLE
 // ALOHIDA_JADVAL

@@ -1,23 +1,31 @@
 package uz.pdp.g57jakarta_ee.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import lombok.*;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.print.attribute.standard.MediaSize;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@DiscriminatorValue(value = "STUDENT")
+//@DiscriminatorValue(value = "STUDENT")
 public class Student extends AuthUser {
     private Double grade;
     private String groupId;
+
     @JoinColumn(name = "course_number")
     private Integer courseNumber;
+
+    @ManyToOne
+    private Group group;
 }
 
 
