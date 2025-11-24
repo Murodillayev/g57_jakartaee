@@ -53,10 +53,9 @@ public class TodoService {
     }
 
     public List<Todo> getAll(String userId) {
+//        AuthUser authUser = authUserRepository.findById(userId).orElseThrow();
+//        return authUser.getTodos();
 
-        AuthUser authUser = authUserRepository.findById(userId).orElseThrow();
-        return authUser.getTodos();
-
-//        return repository.findAllByUserId(userId);
+        return repository.findAllByUserId(userId);
     }
 }

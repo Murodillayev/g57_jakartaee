@@ -23,7 +23,6 @@ public class TodoRepositoryImpl implements TodoRepository {
         EntityManagerFactory emf = JpaConfig.entityManagerFactory();
         EntityManager em = emf.createEntityManager();
 
-
         em.getTransaction().begin();
 
         if (findById(todo.getId()).isPresent()) {
@@ -44,8 +43,7 @@ public class TodoRepositoryImpl implements TodoRepository {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        String jpql = "delete from Todo t where t.id = :id";
-        Query query = em.createQuery(jpql).setParameter("id", todo.getId());
+        Query query = em.createNamedQuery("Todo.delete").setParameter("id", todo.getId());
         query.executeUpdate();
         em.getTransaction().commit();
 
@@ -69,7 +67,7 @@ public class TodoRepositoryImpl implements TodoRepository {
         EntityManagerFactory emf = JpaConfig.entityManagerFactory();
         EntityManager em = emf.createEntityManager();
 
-        TypedQuery<Todo> query = em.createQuery("from Todo t where t.user.id = :userId", Todo.class)
+        TypedQuery<Todo> query = em.createNamedQuery("Todo.user-todos", Todo.class)
                 .setParameter("userId", userId);
 
         List<Todo> list = query.getResultList();

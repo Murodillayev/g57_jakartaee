@@ -15,6 +15,25 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "todos")
+//@NamedQueries({
+//        @NamedQuery(name = "Todo.user-todos", query = "from Todo t where t.user.id = :userId"),
+//        @NamedQuery(name = "Todo.delete", query = "delete from Todo t where t.id = :id")
+//})
+@SqlResultSetMapping(
+        name = "assda",
+        entities = @EntityResult(entityClass = Todo.class)
+)
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "Todo.user-todos", query = """
+                select t.* from todos t 
+                    left join auth_user a on t.user_id = a.id 
+                 where a.id = :userId
+                 
+                """,resultSetMapping = "assda"),
+        @NamedNativeQuery(name = "Todo.delete", query = """
+                delete from todo t where t.id = :id
+                """)
+})
 public class Todo {
 
     @Id

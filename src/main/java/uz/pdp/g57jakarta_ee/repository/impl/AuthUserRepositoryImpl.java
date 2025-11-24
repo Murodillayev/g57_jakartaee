@@ -28,8 +28,11 @@ public class AuthUserRepositoryImpl implements AuthUserRepository {
 //        Query query = entityManager.createNativeQuery("select * from auth_user where username=:username", AuthUser.class)
 //                .setParameter("username", username);
 
-        AuthUser authUser = (AuthUser) query.getSingleResult();
-        return Optional.ofNullable(authUser);
+        try {
+            return Optional.of(query.getSingleResult());
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
     @Override
