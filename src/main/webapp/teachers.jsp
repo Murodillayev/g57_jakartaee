@@ -14,6 +14,9 @@
 </head>
 <body>
 
+<%if (request.getParameter("error") != null) {%>
+<h1><%=request.getParameter("error")%></h1>
+<%}%>
 <table class="table">
     <thead>
     <tr>

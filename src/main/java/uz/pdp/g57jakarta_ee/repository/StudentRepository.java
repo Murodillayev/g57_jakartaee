@@ -1,10 +1,9 @@
 package uz.pdp.g57jakarta_ee.repository;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
-import uz.pdp.g57jakarta_ee.entities.Student;
 import uz.pdp.g57jakarta_ee.config.JpaConfig;
+import uz.pdp.g57jakarta_ee.entities.Student;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,7 +28,7 @@ public class StudentRepository {
         Student student = new Student();
         student.setFullName("Mansurbek");
         student.setCourseNumber(2);
-        student.setGrade(100.);
+        student.setGrade(1.);
         student.setGroupId("12");
         student.setCreatedAt(LocalDateTime.now());
         em.persist(student);

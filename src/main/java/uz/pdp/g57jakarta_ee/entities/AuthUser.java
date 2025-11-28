@@ -1,10 +1,8 @@
 package uz.pdp.g57jakarta_ee.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import uz.pdp.g57jakarta_ee.UzbekNumber;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
@@ -14,10 +12,13 @@ import lombok.Setter;
 //@DiscriminatorColumn(name = "user_type")
 @Entity
 @Table(name = "auth_user")
+@ToString
 public class AuthUser extends AuditableEntity {
     private String fullName;
     private String username;
     private String password;
+
+    @UzbekNumber(message = "Bu ozbek raqami emas")
     private String phone;
 }
 

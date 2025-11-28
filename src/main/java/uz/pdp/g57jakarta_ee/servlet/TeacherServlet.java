@@ -19,7 +19,7 @@ public class TeacherServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         if (req.getParameter("post") != null) {
-            repository.create();
+            repository.create(req.getParameter("post"));
         }
 
         List<Teacher> teachers = repository.findAll();

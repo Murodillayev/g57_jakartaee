@@ -21,14 +21,14 @@ public class TeacherRepository {
         return list;
     }
 
-    public void create() {
+    public void create(String post) {
         EntityManager em = JpaConfig.entityManager();
         em.getTransaction().begin();
         Teacher teacher = new Teacher();
         teacher.setFullName("Hoshimjon");
         teacher.setLevel("PROFESSOR");
         teacher.setSalary(100000000.);
-        teacher.setSubject("Fizika");
+        teacher.setSubject(post);
         teacher.setCreatedAt(LocalDateTime.now());
         em.persist(teacher);
         em.getTransaction().commit();
